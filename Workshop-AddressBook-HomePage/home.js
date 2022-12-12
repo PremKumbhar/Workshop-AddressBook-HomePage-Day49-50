@@ -25,9 +25,9 @@ const createInnerHtml = () => {
         <td>${contact._phone}</td>
         <td>
             <img id="${contact._id}" onclick="remove(this)" alt="delete"
-            src="../icons/delete-black-18dp.svg">
+            src="delete-black-18dp.svg">
             <img id="${contact._id}" alt="edit" onclick="update(this)"
-            src="../icons/create-black-18dp.svg">
+            src="create-black-18dp.svg">
         </td>    
     </tr>
     `;
@@ -42,6 +42,13 @@ const remove = (node) => {
     contactList.splice(index,1);
     localStorage.setItem("ContactList",JSON.stringify(contactList));
     createInnerHtml();
+}
+
+const update = (node) => {
+    let contact = contactList.find(cdata => cdata._id==node._id);
+    if(!contact) return;
+    localStorage.setItem('editContact',JSON.stringify(contact));
+    window.location.replace(site_properties.add_adbk_form_page);
 }
 
 
